@@ -124,6 +124,26 @@ int main(void)
   {
     Calculate_Oula();    //计算欧拉角
 
+    //限制偏航角的范围
+    if (yaw < 0.0f)
+    {
+      yaw = 0.0f;
+    }
+    if (yaw > 180.0f)
+    {
+      yaw = 180.0f;
+    }
+
+    //限制俯仰角的范围
+    if (pitch < 60.0f)
+    {
+      pitch = 60.0f;
+    }
+    if (pitch > 120.0f)
+    {
+      pitch = 120.0f;
+    }
+
     uint8_t Yaw_Angle;    //普通模式偏航舵机角度
     uint8_t Pitch_Angle;    //普通模式俯仰舵机角度
 
@@ -133,8 +153,8 @@ int main(void)
     control_Yaw_Angle(Yaw_Angle);
     control_Pitch_Angle(Pitch_Angle);
 
-    OLED_ShowNum(24, 0, Yaw_Angle, 4, 16, 0);
-    OLED_ShowNum(40, 2, Pitch_Angle, 4, 16, 0);
+    OLED_ShowNum(32, 0, Yaw_Angle, 3, 16, 0);
+    OLED_ShowNum(48, 2, Pitch_Angle, 3, 16, 0);
 
     /* USER CODE END WHILE */
 
